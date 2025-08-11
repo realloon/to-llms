@@ -41,13 +41,13 @@ func main() {
 
 	result := strings.Join([]string{config.Before, code, config.After}, "\n\n")
 
-	ouputDir := "./output"
+	outputDir := "./output"
 
-	if err := os.MkdirAll(ouputDir, 0755); err != nil {
+	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		log.Fatal(err)
 	}
 
-	outputPath := filepath.Join(ouputDir, "LLMs.txt")
+	outputPath := filepath.Join(outputDir, "LLMs.txt")
 	err = os.WriteFile(outputPath, []byte(result), 0644)
 	if err != nil {
 		log.Fatal(err)
