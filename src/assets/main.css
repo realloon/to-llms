@@ -1,0 +1,4 @@
+body {
+  width: min(900px, 100%);
+  margin-inline: auto;
+}
