@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import AppHeader from './components/AppHeader.vue'
+import Reader from './components/Reader.vue'
+import Stack from './components/ui/Stack.vue'
+import Button from './components/ui/Button.vue'
+
 import { useCollect } from './hooks/useCollect'
 import { useClipboard } from './hooks/useClipboard'
 import { useSaveFile } from './hooks/useSaveFile'
 
-const { collect, readCollect } = useCollect()
+const { collect } = useCollect()
 const { isCopied, copyText } = useClipboard()
 const { isSaved, saveFile } = useSaveFile()
 
@@ -19,22 +24,27 @@ async function handleSave() {
 </script>
 
 <template>
-  <h1>to LLMs</h1>
+  <AppHeader />
 
-  <div>
-    <p>Please select the root directory of your C# project.</p>
-    <button @click="readCollect">Load Directory</button>
-  </div>
+  <main>
+    <Reader />
 
-  <div v-show="collect">
-    <p>Processing completed.</p>
+    <Stack direction="row" style="align-items: baseline" v-show="collect">
+      <Button @click="handleCopy">Copy</Button>
+      <p v-show="isCopied">Successfully Copied.</p>
+    </Stack>
 
-    <button @click="handleCopy">Copy</button>
-    <p v-show="isCopied">Successfully Copied.</p>
-
-    <button @click="handleSave">Save File</button>
-    <p v-show="isSaved">Successfully Saved.</p>
-  </div>
+    <Stack direction="row" style="align-items: baseline" v-show="collect">
+      <Button @click="handleSave">Save File</Button>
+      <p v-show="isSaved">Successfully Saved.</p>
+    </Stack>
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+</style>
