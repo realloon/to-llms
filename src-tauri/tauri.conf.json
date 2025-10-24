@@ -14,9 +14,12 @@
       {
         "title": "to LLMs",
         "width": 400,
-        "height": 300
+        "height": 300,
+        "transparent": true,
+        "titleBarStyle": "Overlay"
       }
     ],
+    "macOSPrivateApi": true,
     "security": {
       "csp": null
     }

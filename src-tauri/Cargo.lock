@@ -4340,6 +4340,7 @@ dependencies = [
  "tauri-plugin-fs",
  "tauri-plugin-opener",
  "walkdir",
+ "window-vibrancy",
 ]
 
 [[package]]

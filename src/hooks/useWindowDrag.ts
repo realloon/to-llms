@@ -7,6 +7,8 @@ let unlisten: (() => void) | null
 export function useOnWindowDrag(callback: Function) {
   onMounted(async () => {
     unlisten = await getCurrentWindow().onDragDropEvent(event => {
+      console.log(event)
+
       if (event.payload.type === 'over') {
         isHovering.value = true
       } else if (event.payload.type === 'drop') {

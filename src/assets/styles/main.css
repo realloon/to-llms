@@ -1,11 +1,20 @@
 :root {
+  --color-font: #000;
+
+  @media (prefers-color-scheme: dark) {
+    --color-font: #fff;
+  }
+}
+
+:root {
   --sans: system-ui, sans-serif;
   --mono: 'Monaco', 'Consolas', monospace;
 }
 
 :root {
-  font-family: var(--sans);
+  color-scheme: light dark;
 
+  font-family: var(--sans);
   text-autospace: normal;
 }
 
@@ -18,11 +27,9 @@ body {
 #app {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 
   box-sizing: border-box;
   min-height: 100vh;
-  padding: 10px;
 }
 
 button {

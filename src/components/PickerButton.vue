@@ -10,8 +10,11 @@ onMounted(() => document.body.addEventListener('click', open))
 
 onUnmounted(() => document.body.removeEventListener('click', open))
 
-function open() {
+function open(event: PointerEvent) {
+  const target = event.target as HTMLElement
+  if (target.tagName === 'HEADER') return
   if (isLoading.value) return
+
   onOpenDir(update)
 }
 </script>
@@ -29,10 +32,9 @@ function open() {
 <style scoped>
 .picker-button {
   font-size: 1rem;
-  font-weight: bold;
 
+  color: var(--color-font);
   background-color: transparent;
-  opacity: 0.6;
 
   flex-grow: 1;
   padding: 0;
@@ -42,7 +44,7 @@ function open() {
   -webkit-user-select: none;
 
   &.is-hover {
-    opacity: 1;
+    color: skyblue;
   }
 }
 </style>
