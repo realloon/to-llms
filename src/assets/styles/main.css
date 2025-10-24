@@ -1,0 +1,28 @@
+:root {
+  --sans: system-ui, sans-serif;
+  --mono: monospace;
+}
+
+:root {
+  font-family: var(--sans);
+
+  text-autospace: normal;
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 8px;
+}
+
+button {
+  font-size: 0.75em;
+}
