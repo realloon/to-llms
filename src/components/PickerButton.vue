@@ -10,7 +10,7 @@ onMounted(() => document.body.addEventListener('click', open))
 
 onUnmounted(() => document.body.removeEventListener('click', open))
 
-function open(event: PointerEvent) {
+function open(event: any) {
   const target = event.target as HTMLElement
   if (target.tagName === 'HEADER') return
   if (isLoading.value) return
