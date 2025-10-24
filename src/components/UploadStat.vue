@@ -17,6 +17,8 @@
   align-items: center;
 
   flex-grow: 1;
+
+  cursor: wait;
 }
 
 .icon {

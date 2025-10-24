@@ -11,6 +11,7 @@ onMounted(() => document.body.addEventListener('click', open))
 onUnmounted(() => document.body.removeEventListener('click', open))
 
 function open() {
+  if (isLoading.value) return
   onOpenDir(update)
 }
 </script>

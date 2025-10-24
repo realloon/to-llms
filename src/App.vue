@@ -16,6 +16,10 @@ function copy() {
 function save() {
   saveText('LLMs.txt', document.value!)
 }
+
+function clean() {
+  document.value = null
+}
 </script>
 
 <template>
@@ -27,6 +31,7 @@ function save() {
 
   <footer>
     <template v-if="document">
+      <button @click.stop="clean">Clean</button>
       <AppButton @click="copy" label="Copy" :is-s="isCopied" />
       <AppButton @click="save" label="Save" :is-s="isSaved" />
     </template>
