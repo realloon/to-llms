@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { onOpenDir } from './utils'
-import { useDocument, useCopyText, useSaveText, useOnWindowDrag } from './hooks'
+import { useDocument, useCopyText, useSaveText } from './hooks'
 import AppButton from './components/AppButton.vue'
-import { computed } from 'vue'
+import UploadStat from './components/UploadStat.vue'
+import PickerButton from './components/PickerButton.vue'
+import ResultReport from './components/ResultReport.vue'
 
-const { document, update } = useDocument()
-const { isHovering } = useOnWindowDrag(update)
+const { document, isLoading } = useDocument()
 const { isCopied, copyText } = useCopyText()
 const { isSaved, saveText } = useSaveText()
-
-const style = computed(() => ({
-  opacity: isHovering.value ? '1' : '0.6',
-}))
-
-function open() {
-  onOpenDir(update)
-}
 
 function copy() {
   copyText(document.value!)
@@ -28,7 +20,9 @@ function save() {
 
 <template>
   <main>
-    <button class="open" :style="style" @click="open">Drop a folder</button>
+    <PickerButton v-if="!document" />
+    <UploadStat v-if="isLoading" />
+    <ResultReport v-if="document" />
   </main>
 
   <footer>
@@ -42,6 +36,7 @@ function save() {
 <style scoped>
 main {
   display: flex;
+  flex-direction: column;
 
   flex-grow: 1;
 }
@@ -51,19 +46,6 @@ footer {
   justify-content: end;
   gap: 4px;
 
-  height: 20px;
-}
-
-.open {
-  font-size: 1rem;
-
-  background-color: transparent;
-
-  flex-grow: 1;
-  padding: 0;
-  border: none;
-
-  user-select: none;
-  -webkit-user-select: none;
+  flex-basis: 20px;
 }
 </style>

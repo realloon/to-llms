@@ -1,6 +1,6 @@
 :root {
   --sans: system-ui, sans-serif;
-  --mono: monospace;
+  --mono: 'Monaco', 'Consolas', monospace;
 }
 
 :root {
@@ -10,6 +10,8 @@
 }
 
 body {
+  font-family: var(--sans);
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -20,9 +22,15 @@ body {
 
   box-sizing: border-box;
   min-height: 100vh;
-  padding: 8px;
+  padding: 10px;
 }
 
 button {
   font-size: 0.75em;
+  font-family: var(--sans);
+}
+
+p,
+ul {
+  margin-block: unset;
 }

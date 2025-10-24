@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "to-llms",
+        "title": "to LLMs",
         "width": 400,
         "height": 300
       }
