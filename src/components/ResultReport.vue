@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useDocument } from '../hooks'
 
-const { document, names } = useDocument()
-
-const files = computed(() => names.value?.length)
-const lines = computed(() => document.value?.split('\n').length)
+const { fileCount, lineCount } = useDocument()
 </script>
 
 <template>
   <p>Extraction completed.</p>
   <ul>
-    <li>files: {{ files }}</li>
-    <li>lines: {{ lines }}</li>
+    <li>files: {{ fileCount }}</li>
+    <li>lines: {{ lineCount }}</li>
   </ul>
 </template>
 
