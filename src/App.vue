@@ -23,8 +23,6 @@ function clean() {
 </script>
 
 <template>
-  <header data-tauri-drag-region></header>
-
   <main>
     <PickerButton v-if="!document" />
     <UploadStat v-if="isLoading" />
@@ -33,25 +31,19 @@ function clean() {
 
   <footer>
     <template v-if="document">
-      <button @click.stop="clean">Clean</button>
-      <AppButton @click="copy" label="Copy" :is-s="isCopied" />
-      <AppButton @click="save" label="Save" :is-s="isSaved" />
+      <AppButton @click.stop="clean" label="Clear" />
+      <AppButton @click="copy" label="Copy" :is="isCopied" />
+      <AppButton @click="save" label="Save" :is="isSaved" />
     </template>
   </footer>
 </template>
 
 <style scoped>
-header {
-  width: 100%;
-  height: 30px;
-}
-
 main {
   display: flex;
   flex-direction: column;
 
   flex-grow: 1;
-  margin-inline: 10px;
 }
 
 footer {
@@ -60,7 +52,5 @@ footer {
   gap: 4px;
 
   flex-basis: 20px;
-  margin-inline: 10px;
-  margin-block-end: 10px;
 }
 </style>

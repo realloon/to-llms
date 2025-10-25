@@ -1,12 +1,7 @@
 use rayon::prelude::*;
 use serde::Serialize;
 use std::fs;
-use tauri::Manager;
 use walkdir::WalkDir;
-#[cfg(target_os = "windows")]
-use window_vibrancy::apply_mica;
-#[cfg(target_os = "macos")]
-use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 #[derive(Serialize)]
 struct ProcessingResult {
@@ -65,19 +60,6 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![process_files])
-        .setup(|app| {
-            let window = app.get_webview_window("main").unwrap();
-
-            #[cfg(target_os = "macos")]
-            apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
-                .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
-
-            #[cfg(target_os = "windows")]
-            apply_mica(&window, Some((18, 18, 18, 125)))
-                .expect("Unsupported platform! 'apply_mica' is only supported on Windows");
-
-            Ok(())
-        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

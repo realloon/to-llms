@@ -21,6 +21,7 @@
 body {
   font-family: var(--sans);
   line-height: 1.5;
+
   margin: 0;
 }
 
@@ -30,6 +31,7 @@ body {
 
   box-sizing: border-box;
   min-height: 100vh;
+  padding: 10px;
 }
 
 button {

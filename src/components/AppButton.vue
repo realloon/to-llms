@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   label: string
-  isS: boolean
+  is?: boolean
 }>()
 </script>
 
