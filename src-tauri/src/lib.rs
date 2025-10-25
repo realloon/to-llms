@@ -1,6 +1,6 @@
+use std::fs;
 use rayon::prelude::*;
 use serde::Serialize;
-use std::fs;
 use walkdir::WalkDir;
 
 #[derive(Serialize)]
