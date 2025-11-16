@@ -11,7 +11,7 @@
 }
 
 body {
-  line-height: 1;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -22,6 +22,8 @@ body {
   box-sizing: border-box;
   min-height: 100vh;
   padding: 10px;
+
+  animation: show 0.5s;
 }
 
 button {
@@ -32,4 +34,14 @@ button {
 p,
 ul {
   margin-block: unset;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
