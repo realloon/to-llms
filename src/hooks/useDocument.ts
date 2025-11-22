@@ -7,16 +7,16 @@ interface ProcessingResult {
   total_lines_count: number
 }
 
-const document = ref<string | null>(null)
-const fileCount = ref<number | null>(null)
-const lineCount = ref<number | null>(null)
+const document = ref<string>()
+const fileCount = ref<number>()
+const lineCount = ref<number>()
 const isLoading = ref(false)
 
 export function useDocument() {
   async function update(root: string) {
-    document.value = null
-    fileCount.value = null
-    lineCount.value = null
+    document.value = undefined
+    fileCount.value = undefined
+    lineCount.value = undefined
     isLoading.value = true
 
     try {

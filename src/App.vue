@@ -18,7 +18,7 @@ function save() {
 }
 
 function clean() {
-  document.value = null
+  document.value = undefined
 }
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import { onOpenDir } from '../utils'
 import { useDocument, useOnWindowDrag } from '../hooks'
-import { onMounted, onUnmounted } from 'vue'
 
 const { isLoading, update } = useDocument()
 const { isHovering } = useOnWindowDrag(update)
@@ -10,9 +10,7 @@ onMounted(() => document.body.addEventListener('click', open))
 
 onUnmounted(() => document.body.removeEventListener('click', open))
 
-function open(event: any) {
-  const target = event.target as HTMLElement
-  if (target.tagName === 'HEADER') return
+function open() {
   if (isLoading.value) return
 
   onOpenDir(update)
