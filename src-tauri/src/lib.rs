@@ -1,6 +1,6 @@
-use std::fs;
 use rayon::prelude::*;
 use serde::Serialize;
+use std::fs;
 use walkdir::WalkDir;
 
 #[derive(Serialize)]
@@ -11,7 +11,11 @@ struct ProcessingResult {
 }
 
 #[tauri::command]
-fn process_files(root: String) -> Result<ProcessingResult, String> {
+fn process_files(
+    root: String,
+    file_extensions: Vec<String>,
+    exclusions: Vec<String>,
+) -> Result<ProcessingResult, String> {
     let root_path = std::path::Path::new(&root);
 
     let paths: Vec<_> = WalkDir::new(root_path)
@@ -20,10 +24,28 @@ fn process_files(root: String) -> Result<ProcessingResult, String> {
         .par_bridge()
         .filter(|entry| {
             let path_str = entry.path().to_string_lossy();
-            entry.file_type().is_file()
-                && path_str.ends_with(".cs")
-                && !path_str.contains("obj")
-                && !path_str.contains("bin")
+            if !entry.file_type().is_file() {
+                return false;
+            }
+
+            // Check file extension
+            let has_valid_extension = file_extensions.iter().any(|ext| {
+                let ext_with_dot = if ext.starts_with('.') {
+                    ext.clone()
+                } else {
+                    format!(".{}", ext)
+                };
+                path_str.ends_with(&ext_with_dot)
+            });
+
+            if !has_valid_extension {
+                return false;
+            }
+
+            // Check exclusions
+            !exclusions
+                .iter()
+                .any(|exclusion| path_str.contains(exclusion))
         })
         .map(|entry| entry.path().to_path_buf())
         .collect();
@@ -33,8 +55,14 @@ fn process_files(root: String) -> Result<ProcessingResult, String> {
         .map(|path| {
             let content = fs::read_to_string(path).unwrap_or_default();
             let relative_path = path.strip_prefix(root_path).unwrap_or(path);
+
+            // Use file extension as language identifier
+            let extension = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+            let extension_lower = extension.to_lowercase();
+
             format!(
-                "```csharp\n// {}\n{}\n```",
+                "```{}\n// {}\n{}\n```",
+                extension_lower,
                 relative_path.display(),
                 content
             )

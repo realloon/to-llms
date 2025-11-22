@@ -1,20 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
-import { onOpenDir } from '../utils'
 import { useDocument, useOnWindowDrag } from '../hooks'
 
 const { isLoading, update } = useDocument()
 const { isHovering } = useOnWindowDrag(update)
 
-onMounted(() => document.body.addEventListener('click', open))
-
-onUnmounted(() => document.body.removeEventListener('click', open))
-
-function open() {
-  if (isLoading.value) return
-
-  onOpenDir(update)
-}
 </script>
 
 <template>

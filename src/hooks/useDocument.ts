@@ -13,14 +13,22 @@ const lineCount = ref<number>()
 const isLoading = ref(false)
 
 export function useDocument() {
-  async function update(root: string) {
+  async function update(
+    root: string,
+    fileExtensions: string[],
+    exclusions: string[]
+  ) {
     document.value = undefined
     fileCount.value = undefined
     lineCount.value = undefined
     isLoading.value = true
 
     try {
-      const result = await invoke<ProcessingResult>('process_files', { root })
+      const result = await invoke<ProcessingResult>('process_files', {
+        root,
+        fileExtensions,
+        exclusions,
+      })
       document.value = result.markdown_content
       fileCount.value = result.processed_files_count
       lineCount.value = result.total_lines_count

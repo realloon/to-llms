@@ -1,1 +1,0 @@
-export { onOpenDir } from './onOpenDir'
