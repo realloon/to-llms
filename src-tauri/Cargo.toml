@@ -1,6 +1,6 @@
 [package]
 name = "to-llms"
-version = "0.6.0"
+version = "0.7.0"
 description = "A Tauri App"
 authors = ["Vortex"]
 edition = "2021"

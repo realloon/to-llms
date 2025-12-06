@@ -16,6 +16,10 @@ const projects = {
     extensions: ['.cs'],
     exclusions: ['obj', 'bin'],
   },
+  TypeScript: {
+    extensions: ['.ts'],
+    exclusions: ['node_modules'],
+  },
   XML: {
     extensions: ['.xml'],
     exclusions: [],
@@ -62,8 +66,9 @@ function clean() {
 
   <footer>
     <select v-show="!document" v-model="projectType" name="project">
-      <option value="C#">C#</option>
-      <option value="XML">XML</option>
+      <option v-for="value in Object.keys(projects)" :value="value">
+        {{ value }}
+      </option>
     </select>
 
     <div style="flex-grow: 1"></div>
