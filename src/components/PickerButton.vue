@@ -23,7 +23,7 @@ const { isHovering } = useOnWindowDrag(update)
   background-color: transparent;
 
   flex-grow: 1;
-  padding: 0;
+  padding: 0 0 1em;
   border: none;
 
   user-select: none;
