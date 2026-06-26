@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="wrapper">
     <svg class="icon" viewBox="0 0 24 24">

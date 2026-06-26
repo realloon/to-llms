@@ -1,5 +1,4 @@
 :root {
-  --color-font: light-dark(#000, #fff);
   --sans: system-ui, sans-serif;
   --mono: 'Monaco', 'Consolas', monospace;
 }
@@ -8,6 +7,10 @@
   color-scheme: light dark;
   font-family: var(--sans);
   text-autospace: normal;
+
+  @media (prefers-color-scheme: dark) {
+    -webkit-font-smoothing: antialiased;
+  }
 }
 
 body {

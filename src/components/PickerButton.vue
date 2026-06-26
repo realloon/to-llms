@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useDocument, useOnWindowDrag } from '../hooks'
+import { useDocument } from '../hooks/useDocument'
+import { useOnWindowDrag } from '../hooks/useWindowDrag'
 
 const { isLoading, update } = useDocument()
 const { isHovering } = useOnWindowDrag(update)
-
 </script>
 
 <template>
@@ -18,9 +18,8 @@ const { isHovering } = useOnWindowDrag(update)
 
 <style scoped>
 .picker-button {
-  font-size: 1rem;
+  font-size: inherit;
 
-  color: var(--color-font);
   background-color: transparent;
 
   flex-grow: 1;

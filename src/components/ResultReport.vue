@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDocument } from '../hooks'
+import { useDocument } from '../hooks/useDocument'
 
 const { fileCount, lineCount } = useDocument()
 </script>
