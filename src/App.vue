@@ -25,31 +25,19 @@ async function openProject() {
 
   update(root, ['.cs'], ['obj', 'bin'])
 }
-
-function copy() {
-  copyText(document.value!)
-}
-
-function save() {
-  saveText('LLMs.txt', document.value!)
-}
-
-function clean() {
-  document.value = undefined
-}
 </script>
 
 <template>
   <main @click="openProject()">
     <PickerButton v-if="!document" />
+    <ResultReport v-else />
     <UploadStat v-if="isLoading" />
-    <ResultReport v-if="document" />
   </main>
 
   <footer v-if="document">
-    <button @click.stop="clean">Clear</button>
-    <button @click="copy">Copy</button>
-    <button @click="save">Save</button>
+    <button @click.stop="document = undefined">Clear</button>
+    <button @click="copyText(document)">Copy</button>
+    <button @click="saveText('LLMs.txt', document)">Save</button>
   </footer>
 </template>
 
@@ -57,7 +45,6 @@ function clean() {
 main {
   display: flex;
   flex-direction: column;
-
   flex-grow: 1;
 }
 
